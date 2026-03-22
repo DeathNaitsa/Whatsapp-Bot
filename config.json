@@ -1,0 +1,71 @@
+{
+  "bot": {
+    "name": "Nishi-Bot",
+    "version": "2.0.0",
+    "prefix": ".",
+    "owner": "43xxxxxx@s.whatsapp.net"
+  },
+  "groups": {
+    "support": "120363xxxxx@g.us",
+    "team": "120363xxxxx@g.us",
+    "log": "120363xxxxx@g.us"
+  },
+  "website": {
+    "port": 3001,
+    "host": "127.0.0.1",
+    "sessionSecret": "CHANGE-THIS-SECRET-KEY",
+    "jwtSecret": "CHANGE-THIS-JWT-SECRET"
+  },
+  "database": {
+    "path": "./data/database.enc",
+    "backupPath": "./data/backups",
+    "autoBackup": true,
+    "backupInterval": 3600000
+  },
+  "security": {
+    "maxLoginAttempts": 5,
+    "lockoutDuration": 900000,
+    "sessionTimeout": 86400000,
+    "passwordMinLength": 8
+  },
+  "features": {
+    "plugins": true,
+    "webInterface": true,
+    "supportSystem": true,
+    "scratchGenerator": true,
+    "groupManagement": true
+  },
+  "rateLimit": {
+    "windowMs": 60000,
+    "maxRequests": 30
+  },
+  "team": {
+    "roles": {
+      "ersteller": {
+        "level": 100,
+        "permissions": ["*"]
+      },
+      "inhaber": {
+        "level": 90,
+        "permissions": ["manage_all", "delete_users", "manage_team", "manage_plugins", "view_all", "scratch_full"]
+      },
+      "owner": {
+        "level": 80,
+        "permissions": ["manage_users", "manage_groups", "view_users", "manage_support", "scratch_advanced"]
+      },
+      "manager": {
+        "level": 60,
+        "permissions": ["manage_team", "view_users", "manage_support", "scratch_basic"]
+      },
+      "supporter": {
+        "level": 40,
+        "permissions": ["view_support", "answer_tickets", "scratch_basic"]
+      }
+    }
+  },
+  "dsgvo": {
+    "requireConsent": true,
+    "consentText": "Mit der Nutzung stimmst du der Datenverarbeitung zu.",
+    "groupAdminConsent": true
+  }
+}
