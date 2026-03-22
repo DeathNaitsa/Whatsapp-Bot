@@ -254,7 +254,7 @@ npm --version
 
 ```bash
 # Bot klonen
-git clone https://github.com/DEIN-USERNAME/whatsapp-bot.git
+git clone https://github.com/DeathNaitsa/whatsapp-bot.git
 cd whatsapp-bot
 
 # Dependencies (10-20 Minuten!)
