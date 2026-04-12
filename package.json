@@ -9,6 +9,7 @@
     "start:watch": "node restart.js",
     "setup": "node setup.js",
     "session-manager": "node session-manager.js",
+    "test-setup": "node test-setup.js",
     "migrate": "node index.js --migrate",
     "web": "node src/website/backend/server.js",
     "dev": "concurrently \"npm run start\" \"npm run web\"",

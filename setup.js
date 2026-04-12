@@ -35,12 +35,15 @@ async function convertToJID(phoneNumber) {
     cleanNumber = cleanNumber.substring(1);
   }
   
-  // Create JID format for WhatsApp
+  // Create JID and LID format for WhatsApp
   const jid = `${cleanNumber}@s.whatsapp.net`;
+  const lid = `${cleanNumber}@lid`;
   
-  console.log(`\n📞 Konvertiere Nummer zu WhatsApp JID: ${jid}`);
+  console.log(`\n📞 Konvertiere Nummer:`);
+  console.log(`   JID: ${jid}`);
+  console.log(`   LID: ${lid}`);
   
-  return jid;
+  return { jid, lid, cleanNumber };
 }
 
 async function initOwnerInDatabase(ownerJid, botName, dbPassword) {
@@ -144,11 +147,12 @@ async function setup() {
   console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   console.log('👤 OWNER SETTINGS');
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
-  console.log('💡 Tipp: WhatsApp-Nummer OHNE + eingeben');
-  console.log('   Beispiel: 4915012345678\n');
+  console.log('💡 JID und LID angeben:');
+  console.log('   JID Format: 4915012345678@s.whatsapp.net');
+  console.log('   LID Format: 4915012345678@lid\n');
   
-  let ownerNumber = await question('📱 Deine WhatsApp-Nummer (z.B. 4915012345678): ');
-  const ownerJid = await convertToJID(ownerNumber);
+  const ownerJid = await question('📱 Owner JID: ');
+  const ownerLid = await question('🔗 Owner LID: ');
   
   console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   console.log('📂 SESSION SETTINGS');
@@ -240,27 +244,6 @@ SESSION_ID=${sessionId}
   console.log('📁 Erstelle Daten-Verzeichnisse...');
   await fs.mkdir('./data', { recursive: true });
   await fs.mkdir('./data/backups', { recursive: true });
-  console.log('✅ Verzeichnisse erstellt');
-  
-  // Check .gitignore
-  try {
-    const gitignoreContent = await fs.readFile('.gitignore', 'utf8');
-    if (!gitignoreContent.includes('.env')) {
-      console.log('⚠️ .gitignore enthält kein .env - wird hinzugefügt');
-      await fs.writeFile('.gitignore', gitignoreContent + '\n.env\ndata/\n');
-    }
-  } catch (e) {
-    console.log('⚠️ Keine .gitignore gefunden');
-  }
-  
-  console.log('\n✅ Setup abgeschlossen!\n');
-  console.log('📝 Zusammenfassung:');
-  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-  
-  // Create data directory
-  console.log('📁 Erstelle Daten-Verzeichnisse...');
-  await fs.mkdir('./data', { recursive: true });
-  await fs.mkdir('./data/backups', { recursive: true });
   await fs.mkdir('./sessions', { recursive: true });
   console.log('✅ Verzeichnisse erstellt');
   
@@ -292,12 +275,13 @@ SESSION_ID=${sessionId}
   console.log(`│ 📝 Beschreibung: ${botDescription.substring(0, 22).padEnd(22)}│`);
   console.log(`│ ⌨️  Prefix:       ${prefix.padEnd(22)}│`);
   console.log(`│ 📱 Owner JID:    ${ownerJid.substring(0, 22).padEnd(22)}│`);
+  console.log(`│ � Owner LID:    ${ownerLid.substring(0, 22).padEnd(22)}│`);
   console.log(`│ 📂 Session:      ${sessionId.padEnd(22)}│`);
   console.log('└────────────────────────────────────────┘\n');
   
   console.log('📚 Nächste Schritte:');
   console.log('  1. Starte den Bot: npm start');
-  console.log(`  2. QR-Code mit WhatsApp scannen (Nummer: ${ownerNumber})`);
+  console.log('  2. QR-Code mit WhatsApp scannen');
   console.log('  3. Du bist automatisch als Owner registriert!');
   console.log('  4. Web-Passwort setzen: .setwebpass <passwort>');
   console.log('  5. Dashboard öffnen: http://localhost:3001/dashboard\n');
