@@ -36,7 +36,7 @@ function startBot() {
     
     console.log('\n🚀 Starting bot...\n');
     
-    const args = ['index.new.js'];
+    const args = ['index.js'];
     if (password) {
         args.push('-p', password);
     }

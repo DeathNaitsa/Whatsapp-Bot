@@ -1,13 +1,15 @@
 {
-  "name": "1malbot",
+  "name": "whatsapp-bot",
   "version": "2.0.0",
   "description": "WhatsApp Bot System mit verschlüsselter Datenbank und Web-Interface",
-  "main": "index.new.js",
+  "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.new.js",
+    "start": "node index.js",
     "start:watch": "node restart.js",
-    "migrate": "node index.new.js --migrate",
+    "setup": "node setup.js",
+    "session-manager": "node session-manager.js",
+    "migrate": "node index.js --migrate",
     "web": "node src/website/backend/server.js",
     "dev": "concurrently \"npm run start\" \"npm run web\"",
     "test": "echo \"Error: no test specified\" && exit 1"

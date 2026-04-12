@@ -1,9 +1,11 @@
 {
   "bot": {
     "name": "Nishi-Bot",
+    "description": "WhatsApp Bot mit erweiterten Funktionen",
     "version": "2.0.0",
     "prefix": ".",
-    "owner": "43xxxxxx@s.whatsapp.net"
+    "owner": "43xxxxxx@s.whatsapp.net",
+    "sessionId": "bot"
   },
   "groups": {
     "support": "120363xxxxx@g.us",
